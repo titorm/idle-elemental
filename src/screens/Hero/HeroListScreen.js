@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import PageHeader from '../../components/PageHeader';
 
-function LoginScreen(props) {
+function HeroListScreen(props) {
     const { navigation } = props;
 
     useLayoutEffect(() => {
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoginScreen;
+export default HeroListScreen;

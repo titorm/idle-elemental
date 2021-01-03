@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useLayoutEffect, useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
@@ -40,7 +39,7 @@ function LoginScreen(props) {
                     .then(() => {
                         dispatch(setUser(Firebase.auth().currentUser));
                         // feedbackService.showSuccessMessage('Account created successfully!');
-                        navigateToHeroList();
+                        navigateToApplication();
                     }).catch((error) => {
                         // feedbackService.showErrorMessage(error.message);
                     });
@@ -53,17 +52,17 @@ function LoginScreen(props) {
                 Firebase.auth().signInWithEmailAndPassword(email, password)
                     .then(() => {
                         dispatch(setUser(Firebase.auth().currentUser));
-                        navigateToHeroList();
+                        navigateToApplication();
                     }).catch((error) => {
                         // feedbackService.showErrorMessage(error.message);
                     });
             });
     }
 
-    function navigateToHeroList() {
+    function navigateToApplication() {
         navigation.reset({
             index: 0,
-            routes: [{ name: 'hero' }],
+            routes: [{ name: 'summon' }],
         });
     }
 
@@ -80,7 +79,7 @@ function LoginScreen(props) {
                 <View style={styles.divider} />
                 <PageHeader
                     title='Login'
-                    subtitle='Glad to see you here :'
+                    subtitle='Glad to see you here'
                 />
                 <TextInput
                     style={styles.input}
