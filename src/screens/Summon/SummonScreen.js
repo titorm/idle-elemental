@@ -1,11 +1,16 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { StyleSheet, View, Button, Text } from 'react-native';
 
+import { CURRENCIES } from '../../application/services/constants';
+
 import { summon } from '../../application/services/summon/summonService';
+import { generatePlayerCurrenciesOvertime } from '../../application/services/currency/currencyService';
 
 function SummonScreen(props) {
     const { navigation } = props;
     const [summonedHeroes, setSummonedHeroes] = useState([]);
+    const [accumulatedResources, setAccumulatedResources] = useState({});
+    const [lastCollectedTime, setLastCollectedTime] = useState(new Date().getTime());
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -15,6 +20,11 @@ function SummonScreen(props) {
 
     const doSummon = async (amount = 1) => {
         setSummonedHeroes(await summon(amount));
+    };
+
+    const collectResources = () => {
+        setAccumulatedResources(generatePlayerCurrenciesOvertime({}, Math.floor((new Date().getTime() - lastCollectedTime) / 1000)));
+        setLastCollectedTime(new Date().getTime());
     };
 
     return (
@@ -31,6 +41,20 @@ function SummonScreen(props) {
                     {hero.name}
                 </Text>
             ))}
+
+            <Text>
+                Collected GOLD:&nbsp;
+                {+accumulatedResources[CURRENCIES.GOLD] || 0}
+            </Text>
+            <Text>
+                Collected XP:&nbsp;
+                {+accumulatedResources[CURRENCIES.XP] || 0}
+            </Text>
+
+            <Button
+                onPress={collectResources}
+                title='Collect Resources'
+            />
         </View>
     );
 }
