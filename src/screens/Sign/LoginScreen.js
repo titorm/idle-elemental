@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useLayoutEffect, useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
@@ -102,7 +103,7 @@ function LoginScreen(props) {
                 <Button
                     style={styles.button}
                     mode='contained'
-                    color='blue'
+                    color='green'
                     onPress={submit}
                 >
                     {onCreate ? 'Sign-Up' : 'Login'}

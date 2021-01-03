@@ -9,7 +9,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 
 import Router from './application/routes/Router';
@@ -19,14 +19,14 @@ import store from './application/store/store';
 function App() {
     return (
         <Provider store={store.store}>
-            <PersistGate
+            {/* <PersistGate
                 loading={null}
                 persistor={store.persistor}
-            >
-                <NavigationContainer>
-                    <Router />
-                </NavigationContainer>
-            </PersistGate>
+            > */}
+            <NavigationContainer>
+                <Router />
+            </NavigationContainer>
+            {/* </PersistGate> */}
         </Provider>
     );
 }

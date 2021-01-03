@@ -8,6 +8,7 @@ target 'idle_elemental' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+
   target 'idle_elementalTests' do
     inherit! :complete
     # Pods for testing

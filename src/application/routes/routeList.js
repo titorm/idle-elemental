@@ -3,7 +3,7 @@ import HeroListScreen from '../../screens/Hero/HeroListScreen';
 
 const options = {
     headerStyle: {
-        backgroundColor: 'blue',
+        backgroundColor: 'green',
     },
     headerTitleStyle: {
         color: 'white',

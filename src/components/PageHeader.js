@@ -33,12 +33,12 @@ function PageHeader(props) {
                         >
                             <Stop
                                 offset='0'
-                                stopColor='orange'
+                                stopColor='green'
                                 stopOpacity='1'
                             />
                             <Stop
                                 offset='1'
-                                stopColor='red'
+                                stopColor='blue'
                                 stopOpacity='1'
                             />
                         </LinearGradient>
@@ -58,7 +58,9 @@ function PageHeader(props) {
 const styles = StyleSheet.create({
     h4: {
         color: 'black',
+        fontSize: 24,
         textAlign: 'center',
+        fontWeight: '300',
     },
     subtitle2: {
         color: 'black',
