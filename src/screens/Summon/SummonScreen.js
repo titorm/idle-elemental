@@ -22,8 +22,8 @@ function SummonScreen(props) {
         setSummonedHeroes(await summon(amount));
     };
 
-    const collectResources = () => {
-        setAccumulatedResources(generatePlayerCurrenciesOvertime({}, Math.floor((new Date().getTime() - lastCollectedTime) / 1000)));
+    const collectResources = async () => {
+        setAccumulatedResources(await generatePlayerCurrenciesOvertime(Math.floor((new Date().getTime() - lastCollectedTime) / 1000)));
         setLastCollectedTime(new Date().getTime());
     };
 
@@ -36,9 +36,9 @@ function SummonScreen(props) {
             />
 
             {summonedHeroes.map((hero) => (
-                <Text key={hero.name}>
+                <Text key={hero.id}>
                     -&nbsp;
-                    {hero.name}
+                    {hero.basicInfo.name}
                 </Text>
             ))}
 

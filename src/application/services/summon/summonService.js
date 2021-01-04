@@ -1,7 +1,7 @@
 import { RARITIES } from '../constants';
 
 import { getHeroList } from '../../api/methods/heroApi';
-import { getSummonProbability } from '../../api/methods/probabilityApi';
+import { getSummonHeroesRate } from '../../api/methods/rateApi';
 
 const formatProbabilityMaxNumbers = (probability) => ({
     [RARITIES.COMMON]: probability[RARITIES.COMMON],
@@ -32,7 +32,7 @@ const summonSingleHero = (heroes, probability) => {
 
 const summon = async (amount = 1) => {
     const heroList = formatHeroes(await getHeroList());
-    const probability = formatProbabilityMaxNumbers(await getSummonProbability());
+    const probability = formatProbabilityMaxNumbers(await getSummonHeroesRate());
 
     const result = [];
     for (let i = 0; i < amount; i++) {

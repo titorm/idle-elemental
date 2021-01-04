@@ -1,5 +1,5 @@
-import { getCollection } from '../api';
+import { getCollectionData } from '../api';
 
-const getHeroList = async () => getCollection('heroes');
+const getHeroList = async () => getCollectionData('heroes');
 
 export { getHeroList };

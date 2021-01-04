@@ -1,11 +1,18 @@
 const CURRENCIES = {
     GOLD: 'GOLD',
+    DIAMOND: 'DIAMOND',
     XP: 'XP',
     ESSENCE: {
         WATER: 'WATER_ESSENCE',
         FIRE: 'FIRE_ESSENCE',
         EARTH: 'EARTH_ESSENCE',
         WIND: 'WIND_ESSENCE',
+    },
+    GEM: {
+        WATER: 'WATER_GEM',
+        FIRE: 'FIRE_GEM',
+        EARTH: 'EARTH_GEM',
+        WIND: 'WIND_GEM',
     },
 };
 
