@@ -1,22 +1,19 @@
 import { CURRENCIES } from '../constants';
 
 import { getDropEssentialRates } from '../../api/methods/rateApi';
+import { getPlayerMultipliers } from '../../api/methods/playerApi';
 
 const generateCurrency = (baseAmount = 0, multiplier = 1, seconds = 0) => {
     return baseAmount * multiplier * seconds;
 };
 
-const getCurrencyMultiplier = () => {
-    return 1;
-};
-
 const generatePlayerCurrenciesOvertime = async (amountOfSeconds = 0) => {
-    const player = {};
+    const playerMultipliers = await getPlayerMultipliers();
     const baseDropRates = await getDropEssentialRates();
 
     return {
-        [CURRENCIES.GOLD]: generateCurrency(baseDropRates[CURRENCIES.GOLD], getCurrencyMultiplier(), amountOfSeconds),
-        [CURRENCIES.XP]: generateCurrency(baseDropRates[CURRENCIES.XP], getCurrencyMultiplier(), amountOfSeconds),
+        [CURRENCIES.GOLD]: generateCurrency(baseDropRates[CURRENCIES.GOLD], playerMultipliers[CURRENCIES.GOLD], amountOfSeconds),
+        [CURRENCIES.XP]: generateCurrency(baseDropRates[CURRENCIES.XP], playerMultipliers[CURRENCIES.XP], amountOfSeconds),
     };
 };
 

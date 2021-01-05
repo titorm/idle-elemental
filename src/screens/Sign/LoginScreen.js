@@ -6,6 +6,8 @@ import Firebase from 'firebase';
 
 import { setUser } from '../../application/store/modules/user/actions';
 
+import { createPlayerInitialData } from '../../application/services/player/playerService';
+
 import PageHeader from '../../components/PageHeader';
 
 const isAndroid = Platform.OS === 'android';
@@ -39,6 +41,7 @@ function LoginScreen(props) {
                     .then(() => {
                         dispatch(setUser(Firebase.auth().currentUser));
                         // feedbackService.showSuccessMessage('Account created successfully!');
+                        createPlayerInitialData();
                         navigateToApplication();
                     }).catch((error) => {
                         // feedbackService.showErrorMessage(error.message);
