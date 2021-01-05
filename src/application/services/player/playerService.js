@@ -1,19 +1,23 @@
 import { CURRENCIES } from '../constants';
 
-import { setPlayer, setPlayerHeroes } from '../../api/methods/playerApi';
+import { setPlayer, setPlayerHeroes, getPlayerResources, updatePlayerResources } from '../../api/methods/playerApi';
 import { getHeroList } from '../../api/methods/heroApi';
 
-const getStartingPlayerResources = () => ({
-    [CURRENCIES.GOLD]: 0,
-    [CURRENCIES.XP]: 0,
-    [CURRENCIES.DIAMOND]: 0,
-});
+const getStartingPlayerResources = () => {
+    const baseResources = {};
+    Object.keys(CURRENCIES).forEach((currency) => {
+        baseResources[currency] = 0;
+    });
+    return baseResources;
+};
 
-const getStartingPlayerMultipliers = () => ({
-    [CURRENCIES.GOLD]: 1,
-    [CURRENCIES.XP]: 1,
-    [CURRENCIES.DIAMOND]: 1,
-});
+const getStartingPlayerMultipliers = () => {
+    const baseMultipliers = {};
+    Object.keys(CURRENCIES).forEach((currency) => {
+        baseMultipliers[currency] = 1;
+    });
+    return baseMultipliers;
+};
 
 const getStartingPlayerHeroes = async () => {
     const heroList = await getHeroList();
@@ -37,4 +41,8 @@ const createPlayerInitialData = async () => {
     await setPlayerHeroes(startingHeroes);
 };
 
-export { createPlayerInitialData };
+const setResourceToPlayer = async (resource, amount) => {
+    updatePlayerResources({ [resource]: amount });
+};
+
+export { createPlayerInitialData, setResourceToPlayer };

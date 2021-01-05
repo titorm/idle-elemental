@@ -14,6 +14,7 @@ const generatePlayerCurrenciesOvertime = async (amountOfSeconds = 0) => {
     return {
         [CURRENCIES.GOLD]: generateCurrency(baseDropRates[CURRENCIES.GOLD], playerMultipliers[CURRENCIES.GOLD], amountOfSeconds),
         [CURRENCIES.XP]: generateCurrency(baseDropRates[CURRENCIES.XP], playerMultipliers[CURRENCIES.XP], amountOfSeconds),
+        [CURRENCIES.DIAMOND]: generateCurrency(baseDropRates[CURRENCIES.DIAMOND], playerMultipliers[CURRENCIES.DIAMOND], amountOfSeconds),
     };
 };
 

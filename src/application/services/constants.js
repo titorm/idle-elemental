@@ -2,18 +2,14 @@ const CURRENCIES = {
     GOLD: 'GOLD',
     DIAMOND: 'DIAMOND',
     XP: 'XP',
-    ESSENCE: {
-        WATER: 'WATER_ESSENCE',
-        FIRE: 'FIRE_ESSENCE',
-        EARTH: 'EARTH_ESSENCE',
-        WIND: 'WIND_ESSENCE',
-    },
-    GEM: {
-        WATER: 'WATER_GEM',
-        FIRE: 'FIRE_GEM',
-        EARTH: 'EARTH_GEM',
-        WIND: 'WIND_GEM',
-    },
+    WATER_ESSENCE: 'WATER_ESSENCE',
+    FIRE_ESSENCE: 'FIRE_ESSENCE',
+    EARTH_ESSENCE: 'EARTH_ESSENCE',
+    WIND_ESSENCE: 'WIND_ESSENCE',
+    WATER_GEM: 'WATER_GEM',
+    FIRE_GEM: 'FIRE_GEM',
+    EARTH_GEM: 'EARTH_GEM',
+    WIND_GEM: 'WIND_GEM',
 };
 
 const RARITIES = {
