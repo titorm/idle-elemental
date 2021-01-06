@@ -11,7 +11,7 @@ function MainRouter() {
 
     let initialRouteName = 'login';
     if (user && user.uid) {
-        initialRouteName = 'app';
+        initialRouteName = 'summon';
     }
 
     function renderScreen({ key, name, component, options }) {
