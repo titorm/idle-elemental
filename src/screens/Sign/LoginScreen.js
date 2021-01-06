@@ -1,5 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import { Button, TextInput } from 'react-native-paper';
 
 import { registerNewUser, loginUser } from '../../application/api/methods/userApi';
@@ -10,11 +11,18 @@ import styles from './LoginScreenStyles';
 
 function LoginScreen(props) {
     const { navigation } = props;
+    const { user } = useSelector((state) => state.user || {});
     const isAndroid = Platform.OS === 'android';
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [onCreate, setOnCreate] = useState(false);
+
+    useEffect(() => {
+        if (user && user.uid) {
+            navigateToApplication();
+        }
+    }, [user]);
 
     useLayoutEffect(() => {
         navigation.setOptions({

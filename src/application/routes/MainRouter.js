@@ -1,19 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
 
 import routeList from './routeList';
 
 const Stack = createStackNavigator();
 
 function MainRouter() {
-    const { user } = useSelector((state) => state.user);
-
-    let initialRouteName = 'login';
-    if (user && user.uid) {
-        initialRouteName = 'summon';
-    }
-
     function renderScreen({ key, name, component, options }) {
         return (
             <Stack.Screen
@@ -30,7 +22,7 @@ function MainRouter() {
     }
 
     return (
-        <Stack.Navigator initialRouteName={initialRouteName}>
+        <Stack.Navigator initialRouteName='login'>
             {renderRoutes()}
         </Stack.Navigator>
     );
