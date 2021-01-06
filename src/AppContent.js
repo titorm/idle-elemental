@@ -9,7 +9,7 @@ import Router from './application/routes/Router';
 import { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData } from './application/services/player/playerService';
 
 import { setUser, setUserConfig } from './application/store/modules/user/actions';
-import { setPlayerResources, setPlayerMultipliers, setPlayerHeroes } from './application/store/modules/player/actions';
+import { setPlayerResources, setPlayerMultipliers, setPlayerTimes, setPlayerHeroes } from './application/store/modules/player/actions';
 
 function AppContent() {
     const dispatch = useDispatch();
@@ -25,6 +25,7 @@ function AppContent() {
             dispatch(setUserConfig(player.config));
             dispatch(setPlayerResources(player.resources));
             dispatch(setPlayerMultipliers(player.multipliers));
+            dispatch(setPlayerTimes(player.times));
             dispatch(setPlayerHeroes(await getCurrentPlayerHeroes()));
         }
 

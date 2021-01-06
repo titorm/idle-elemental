@@ -9,6 +9,7 @@ const setPlayerHeroes = (newData) => addBatchSubData('players', Firebase.auth().
 
 const updatePlayerMultipliers = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, { multipliers: newData });
 const updatePlayerResources = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, { resources: newData });
+const updatePlayerTimes = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, { times: newData });
 const updatePlayerHeroes = (newData) => updateSubCollectionDocumentData('players', Firebase.auth().currentUser.uid, 'heroes', newData);
 
 export {
@@ -20,5 +21,6 @@ export {
 
     updatePlayerResources,
     updatePlayerMultipliers,
+    updatePlayerTimes,
     updatePlayerHeroes,
 };

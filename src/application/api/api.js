@@ -16,12 +16,12 @@ const getDocumentData = async (collectionName, docID) => {
 
 const setDocumentData = async (collectionName, docID, data) => {
     const doc = await getDocument(getCollection(collectionName), docID);
-    return doc.set(data);
+    return doc.set(data, { merge: true });
 };
 
 const updateDocumentData = async (collectionName, docID, data) => {
     const doc = await getDocument(getCollection(collectionName), docID);
-    return doc.update(data);
+    return doc.update(data, { merge: true });
 };
 
 const incrementDocumentData = async (collectionName, docID, field, incrementValue) => {
@@ -47,14 +47,14 @@ const setSubCollectionDocumentData = async (collectionName, docID, subCollection
     const baseDoc = await getDocument(getCollection(collectionName), docID);
     const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
     const doc = await getDocument(baseDocCollection, subDocID).get();
-    return doc.set(data);
+    return doc.set(data, { merge: true });
 };
 
 const updateSubCollectionDocumentData = async (collectionName, docID, subCollectionName, subDocID, data) => {
     const baseDoc = await getDocument(getCollection(collectionName), docID);
     const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
     const doc = await getDocument(baseDocCollection, subDocID).get();
-    return doc.update(data);
+    return doc.update(data, { merge: true });
 };
 
 const incrementSubCollectionDocumentData = async (collectionName, docID, subCollectionName, subDocID, field, incrementValue) => {
@@ -62,7 +62,7 @@ const incrementSubCollectionDocumentData = async (collectionName, docID, subColl
     const baseDoc = await getDocument(getCollection(collectionName), docID);
     const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
     const doc = await getDocument(baseDocCollection, subDocID).get();
-    return doc.update({ [field]: increment });
+    return doc.update({ [field]: increment }, { merge: true });
 };
 
 const addBatchData = async (collectionName, data = []) => {

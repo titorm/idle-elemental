@@ -7,6 +7,15 @@ const getStartingPlayerConfig = () => ({
     roles: ['PLAYER'],
 });
 
+const getStartingPlayerTimes = () => {
+    const now = new Date().getTime();
+    return {
+        createdAt: now,
+        lastLogin: now,
+        lastCollect: now,
+    };
+};
+
 const getStartingPlayerResources = () => {
     const baseResources = {};
     Object.keys(CURRENCIES).forEach((currency) => {
@@ -37,10 +46,13 @@ const getBaseHero = () => ({
 
 const createPlayerInitialData = async () => {
     const config = getStartingPlayerConfig();
+    const times = getStartingPlayerTimes();
     const resources = getStartingPlayerResources();
     const multipliers = getStartingPlayerMultipliers();
+
     await setPlayer({
         config,
+        times,
         resources,
         multipliers,
     });
