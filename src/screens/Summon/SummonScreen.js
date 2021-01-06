@@ -32,7 +32,7 @@ function SummonScreen(props) {
             // TODO feedback!
             return;
         }
-        const newResources = removePlayerResource(resources, price);
+        const newResources = await removePlayerResource(resources, price);
         dispatch(setPlayerResources(newResources));
 
         const heroes = await summon(amount);

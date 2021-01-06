@@ -23,7 +23,7 @@ const removePlayerResource = async (playerResources, price) => {
     price.forEach((elem) => {
         newResources[elem.currency] -= elem.amount;
     });
-    updatePlayerResources(newResources);
+    await updatePlayerResources(newResources);
     return newResources;
 };
 
