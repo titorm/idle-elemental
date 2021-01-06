@@ -47,11 +47,15 @@ const createPlayerInitialData = async () => {
     await setPlayerHeroes(startingHeroes);
 };
 
-const setResourceToPlayer = async (resource, amount) => {
+const setResourcesToPlayer = async (data) => {
+    updatePlayerResources(data);
+};
+
+const setSpecificResourceToPlayer = async (resource, amount) => {
     updatePlayerResources({ [resource]: amount });
 };
 
 const getCurrentPlayer = () => getPlayer();
 const getCurrentPlayerHeroes = () => getPlayerHeroes();
 
-export { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData, setResourceToPlayer };
+export { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData, setResourcesToPlayer, setSpecificResourceToPlayer };

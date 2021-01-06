@@ -1,18 +1,23 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { View, Button, Text } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { CURRENCIES } from '../../application/services/constants';
 
 import { summon } from '../../application/services/summon/summonService';
 import { generatePlayerCurrenciesOvertime } from '../../application/services/currency/currencyService';
+import { setResourcesToPlayer } from '../../application/services/player/playerService';
+
+import { setPlayerResources } from '../../application/store/modules/player/actions';
 
 import styles from './SummonScreenStyles';
 
 function SummonScreen(props) {
+    const dispatch = useDispatch();
     const { navigation } = props;
     const [summonedHeroes, setSummonedHeroes] = useState([]);
-    const [accumulatedResources, setAccumulatedResources] = useState({});
     const [lastCollectedTime, setLastCollectedTime] = useState(new Date().getTime());
+    const { resources, multipliers } = useSelector((state) => state.player || {});
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -25,8 +30,15 @@ function SummonScreen(props) {
     };
 
     const collectResources = async () => {
-        setAccumulatedResources(await generatePlayerCurrenciesOvertime(Math.floor((new Date().getTime() - lastCollectedTime) / 1000)));
-        setLastCollectedTime(new Date().getTime());
+        const generatedResources = await generatePlayerCurrenciesOvertime(multipliers, Math.floor((new Date().getTime() - lastCollectedTime) / 1000));
+        const newResources = { ...resources };
+        Object.keys(generatedResources).forEach((res) => {
+            newResources[res] = (newResources[res] || 0) + (generatedResources[res] || 0);
+        });
+        setResourcesToPlayer(newResources).then(() => {
+            dispatch(setPlayerResources(newResources));
+            setLastCollectedTime(new Date().getTime());
+        });
     };
 
     return (
@@ -45,12 +57,16 @@ function SummonScreen(props) {
             ))}
 
             <Text>
-                Collected GOLD:&nbsp;
-                {+accumulatedResources[CURRENCIES.GOLD] || 0}
+                Diamonds:&nbsp;
+                {resources[CURRENCIES.DIAMOND] || 0}
             </Text>
             <Text>
-                Collected XP:&nbsp;
-                {+accumulatedResources[CURRENCIES.XP] || 0}
+                Gold:&nbsp;
+                {resources[CURRENCIES.GOLD] || 0}
+            </Text>
+            <Text>
+                XP:&nbsp;
+                {resources[CURRENCIES.XP] || 0}
             </Text>
 
             <Button

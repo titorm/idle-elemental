@@ -20,7 +20,7 @@ const setDocumentData = async (collectionName, docID, data) => {
 };
 
 const updateDocumentData = async (collectionName, docID, data) => {
-    const doc = await getDocument(getCollection(collectionName), docID).get();
+    const doc = await getDocument(getCollection(collectionName), docID);
     return doc.update(data);
 };
 

@@ -4,16 +4,6 @@ import { getDocumentData, setDocumentData, updateDocumentData, getSubCollectionD
 const setPlayer = (newData) => setDocumentData('players', Firebase.auth().currentUser.uid, newData); // Only used for initial set!
 const getPlayer = () => getDocumentData('players', Firebase.auth().currentUser.uid);
 
-// const getPlayerResources = async () => {
-//     const data = await getDocumentData('players', Firebase.auth().currentUser.uid);
-//     return data.resources;
-// };
-
-// const getPlayerMultipliers = async () => {
-//     const data = await getDocumentData('players', Firebase.auth().currentUser.uid);
-//     return data.multipliers;
-// };
-
 const getPlayerHeroes = () => getSubCollectionData('players', Firebase.auth().currentUser.uid, 'heroes');
 const setPlayerHeroes = (newData) => addBatchSubData('players', Firebase.auth().currentUser.uid, 'heroes', newData);
 
