@@ -7,13 +7,13 @@ const getPlayerResources = async () => {
     const data = await getDocumentData('players', Firebase.auth().currentUser.uid);
     return data.resources;
 };
-const updatePlayerResources = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, newData);
+const updatePlayerResources = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, { resources: newData });
 
 const getPlayerMultipliers = async () => {
     const data = await getDocumentData('players', Firebase.auth().currentUser.uid);
     return data.multipliers;
 };
-const updatePlayerMultipliers = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, newData);
+const updatePlayerMultipliers = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, { multipliers: newData });
 
 const getPlayerHeroes = () => getSubCollectionData('players', Firebase.auth().currentUser.uid, 'heroes');
 const setPlayerHeroes = (newData) => addBatchSubData('players', Firebase.auth().currentUser.uid, 'heroes', newData);

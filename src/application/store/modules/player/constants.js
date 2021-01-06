@@ -1,0 +1,1 @@
+export const SET_PLAYER_RESOURCES = '@player/SET_PLAYER_RESOURCES';

@@ -26,6 +26,12 @@ const updateDocumentData = async (collectionName, docID, data) => {
     return doc.update(data);
 };
 
+const incrementDocumentData = async (collectionName, docID, field, incrementValue) => {
+    const increment = Firebase.firestore.FieldValue.increment(incrementValue);
+    const doc = await getDocument(getCollection(collectionName), docID);
+    return doc.update({ [field]: increment });
+};
+
 const getSubCollectionData = async (collectionName, docID, subCollectionName) => {
     const baseDoc = await getDocument(getCollection(collectionName), docID);
     const { docs } = await getSubCollection(baseDoc, subCollectionName).get();
@@ -51,6 +57,14 @@ const updateSubCollectionDocumentData = async (collectionName, docID, subCollect
     const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
     const doc = await getDocument(baseDocCollection, subDocID).get();
     return doc.update(data);
+};
+
+const incrementSubCollectionDocumentData = async (collectionName, docID, subCollectionName, subDocID, field, incrementValue) => {
+    const increment = Firebase.firestore.FieldValue.increment(incrementValue);
+    const baseDoc = await getDocument(getCollection(collectionName), docID);
+    const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
+    const doc = await getDocument(baseDocCollection, subDocID).get();
+    return doc.update({ [field]: increment });
 };
 
 const addBatchData = async (collectionName, data = []) => {
@@ -83,10 +97,12 @@ export {
     getDocumentData,
     setDocumentData,
     updateDocumentData,
+    incrementDocumentData,
     getSubCollectionData,
     getSubCollectionDocumentData,
     setSubCollectionDocumentData,
     updateSubCollectionDocumentData,
+    incrementSubCollectionDocumentData,
     addBatchData,
     addBatchSubData,
 };
