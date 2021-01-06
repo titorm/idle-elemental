@@ -1,2 +1,2 @@
 export const SET_USER = '@user/SET_USER';
-export const SET_USER_ROLES = '@user/SET_USER_ROLES';
+export const SET_USER_CONFIG = '@user/SET_USER_CONFIG';

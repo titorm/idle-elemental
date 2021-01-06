@@ -1,4 +1,4 @@
-import { SET_USER, SET_USER_ROLES } from './constants';
+import { SET_USER, SET_USER_CONFIG } from './constants';
 
 export function setUser(payload) {
     return {
@@ -7,9 +7,9 @@ export function setUser(payload) {
     };
 }
 
-export function setUserRoles(payload) {
+export function setUserConfig(payload) {
     return {
-        type: SET_USER_ROLES,
+        type: SET_USER_CONFIG,
         payload,
     };
 }

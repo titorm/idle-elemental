@@ -1,7 +1,11 @@
 import { CURRENCIES } from '../constants';
 
-import { setPlayer, setPlayerHeroes, getPlayerResources, updatePlayerResources } from '../../api/methods/playerApi';
+import { getPlayer, setPlayer, getPlayerHeroes, setPlayerHeroes, updatePlayerResources } from '../../api/methods/playerApi';
 import { getHeroList } from '../../api/methods/heroApi';
+
+const getStartingPlayerConfig = () => ({
+    roles: ['PLAYER'],
+});
 
 const getStartingPlayerResources = () => {
     const baseResources = {};
@@ -30,9 +34,11 @@ const getBaseHero = () => ({
 });
 
 const createPlayerInitialData = async () => {
+    const config = getStartingPlayerConfig();
     const resources = getStartingPlayerResources();
     const multipliers = getStartingPlayerMultipliers();
     await setPlayer({
+        config,
         resources,
         multipliers,
     });
@@ -45,4 +51,7 @@ const setResourceToPlayer = async (resource, amount) => {
     updatePlayerResources({ [resource]: amount });
 };
 
-export { createPlayerInitialData, setResourceToPlayer };
+const getCurrentPlayer = () => getPlayer();
+const getCurrentPlayerHeroes = () => getPlayerHeroes();
+
+export { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData, setResourceToPlayer };

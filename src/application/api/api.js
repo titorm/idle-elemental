@@ -1,8 +1,6 @@
 import Firebase from 'firebase';
 
-const db = Firebase.firestore();
-
-const getCollection = (collectionName) => db.collection(collectionName);
+const getCollection = (collectionName) => Firebase.firestore().collection(collectionName);
 const getSubCollection = (doc, collectionName) => doc.collection(collectionName);
 const getDocument = (collection, docID) => collection.doc(docID);
 
@@ -68,7 +66,7 @@ const incrementSubCollectionDocumentData = async (collectionName, docID, subColl
 };
 
 const addBatchData = async (collectionName, data = []) => {
-    const batch = db.batch();
+    const batch = Firebase.firestore().batch();
     const collection = await getCollection(collectionName);
 
     data.forEach((item) => {
@@ -80,7 +78,7 @@ const addBatchData = async (collectionName, data = []) => {
 };
 
 const addBatchSubData = async (collectionName, docID, subCollectionName, data = []) => {
-    const batch = db.batch();
+    const batch = Firebase.firestore().batch();
     const baseDoc = await getDocument(getCollection(collectionName), docID);
     const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
 
