@@ -1,10 +1,12 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { StyleSheet, View, Button, Text } from 'react-native';
+import { View, Button, Text } from 'react-native';
 
 import { CURRENCIES } from '../../application/services/constants';
 
 import { summon } from '../../application/services/summon/summonService';
 import { generatePlayerCurrenciesOvertime } from '../../application/services/currency/currencyService';
+
+import styles from './SummonScreenStyles';
 
 function SummonScreen(props) {
     const { navigation } = props;
@@ -58,13 +60,5 @@ function SummonScreen(props) {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-});
 
 export default SummonScreen;

@@ -1,10 +1,12 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 
 import { registerNewUser, loginUser } from '../../application/api/methods/userApi';
 
 import PageHeader from '../../components/PageHeader';
+
+import styles from './LoginScreenStyles';
 
 function LoginScreen(props) {
     const { navigation } = props;
@@ -104,25 +106,5 @@ function LoginScreen(props) {
         </TouchableWithoutFeedback>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-    divider: {
-        flex: 1,
-    },
-    input: {
-        marginTop: 12,
-        width: '90%',
-    },
-    button: {
-        marginTop: 12,
-        width: '90%',
-        padding: 8,
-    },
-});
 
 export default LoginScreen;
