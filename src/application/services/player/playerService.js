@@ -1,6 +1,6 @@
 import { CURRENCIES } from '../constants';
 
-import { getPlayer, setPlayer, getPlayerHeroes, setPlayerHeroes, updatePlayerResources } from '../../api/methods/playerApi';
+import { getPlayer, setPlayer, getPlayerHeroes, setPlayerHeroes } from '../../api/methods/playerApi';
 import { getHeroList } from '../../api/methods/heroApi';
 
 const getStartingPlayerConfig = () => ({
@@ -31,6 +31,8 @@ const getStartingPlayerHeroes = async () => {
 
 const getBaseHero = () => ({
     stars: 0,
+    ascension: 0,
+    medals: 0,
 });
 
 const createPlayerInitialData = async () => {
@@ -47,15 +49,7 @@ const createPlayerInitialData = async () => {
     await setPlayerHeroes(startingHeroes);
 };
 
-const setResourcesToPlayer = async (data) => {
-    updatePlayerResources(data);
-};
-
-const setSpecificResourceToPlayer = async (resource, amount) => {
-    updatePlayerResources({ [resource]: amount });
-};
-
 const getCurrentPlayer = () => getPlayer();
 const getCurrentPlayerHeroes = () => getPlayerHeroes();
 
-export { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData, setResourcesToPlayer, setSpecificResourceToPlayer };
+export { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData };

@@ -6,7 +6,8 @@ import { CURRENCIES } from '../../application/services/constants';
 
 import { summon } from '../../application/services/summon/summonService';
 import { generatePlayerCurrenciesOvertime } from '../../application/services/currency/currencyService';
-import { setResourcesToPlayer } from '../../application/services/player/playerService';
+import { getNormalSummonHeroesPrice } from '../../application/services/price/priceService';
+import { setResourcesToPlayer, playerHasResource } from '../../application/services/player/playerResourceService';
 
 import { setPlayerResources } from '../../application/store/modules/player/actions';
 
@@ -26,6 +27,8 @@ function SummonScreen(props) {
     }, [navigation]);
 
     const doSummon = async (amount = 1) => {
+        const price = await getNormalSummonHeroesPrice(amount);
+        if (playerHasResource(resources, price)) return; // TODO feedback!
         setSummonedHeroes(await summon(amount));
     };
 
