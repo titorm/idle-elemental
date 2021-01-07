@@ -18,7 +18,7 @@ const normalizeTranslate = {
 // Função responsável por adquirir o idioma utilizado no device
 const getLanguageByDevice = () => {
     return Platform.OS === 'ios'
-        ? NativeModules.SettingsManager.settings.AppleLocale // Adquire o idioma no device iOS
+        ? NativeModules.SettingsManager.settings.AppleLocale || NativeModules.SettingsManager.settings.AppleLanguages[0] // Adquire o idioma no device iOS
         : NativeModules.I18nManager.localeIdentifier; // Adquire o idioma no device Android
 };
 
@@ -40,6 +40,5 @@ const setLanguageToI18n = () => {
 
 setLanguageToI18n();
 
-// eslint-disable-next-line import/prefer-default-export
 export const translate = (key) => I18n.t(key);
 export { keys };
