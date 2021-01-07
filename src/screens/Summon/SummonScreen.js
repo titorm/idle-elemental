@@ -14,9 +14,10 @@ import { setPlayerResources, setPlayerTimes } from '../../application/store/modu
 
 import styles from './SummonScreenStyles';
 
-function SummonScreen(props) {
+import Header from '../../components/Header';
+
+function SummonScreen({ navigation }) {
     const dispatch = useDispatch();
-    const { navigation } = props;
     const [summonedHeroes, setSummonedHeroes] = useState([]);
     const { resources, multipliers, times } = useSelector((state) => state.player || {});
 
@@ -55,38 +56,41 @@ function SummonScreen(props) {
     };
 
     return (
-        <View style={styles.container}>
-            <Button
-                onPress={() => openNormalChest(1)}
-                title='Buy Normal Chest (100 Diamond)'
-                color='#841584'
-            />
+        <>
+            <Header />
+            <View style={styles.container}>
+                <Button
+                    onPress={() => openNormalChest(1)}
+                    title='Buy Normal Chest (100 Diamond)'
+                    color='#841584'
+                />
 
-            {summonedHeroes.map((hero) => (
-                <Text key={hero.id}>
-                    -&nbsp;
-                    {hero.basicInfo.name}
+                {summonedHeroes.map((hero) => (
+                    <Text key={hero.id}>
+                        -&nbsp;
+                        {hero.basicInfo.name}
+                    </Text>
+                ))}
+
+                <Text>
+                    Diamonds:&nbsp;
+                    {resources[CURRENCIES.DIAMOND] || 0}
                 </Text>
-            ))}
+                <Text>
+                    Gold:&nbsp;
+                    {resources[CURRENCIES.GOLD] || 0}
+                </Text>
+                <Text>
+                    XP:&nbsp;
+                    {resources[CURRENCIES.XP] || 0}
+                </Text>
 
-            <Text>
-                Diamonds:&nbsp;
-                {resources[CURRENCIES.DIAMOND] || 0}
-            </Text>
-            <Text>
-                Gold:&nbsp;
-                {resources[CURRENCIES.GOLD] || 0}
-            </Text>
-            <Text>
-                XP:&nbsp;
-                {resources[CURRENCIES.XP] || 0}
-            </Text>
-
-            <Button
-                onPress={collectResources}
-                title='Collect Resources'
-            />
-        </View>
+                <Button
+                    onPress={collectResources}
+                    title='Collect Resources'
+                />
+            </View>
+        </>
     );
 }
 

@@ -30,7 +30,7 @@ function AppRouter(props) {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: 'Manager',
+            headerShown: false,
         });
     }, [navigation]);
 
