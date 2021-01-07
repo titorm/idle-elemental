@@ -12,4 +12,6 @@ export default {
     [keys.FIRE_GEM]: 'Fire Gem',
     [keys.EARTH_GEM]: 'Earth Gem',
     [keys.WIND_GEM]: 'Wind Gem',
+
+    [keys.NORMAL_HERO_CHEST]: 'Normal Hero Chest',
 };

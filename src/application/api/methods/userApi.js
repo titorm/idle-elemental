@@ -1,13 +1,15 @@
 import Firebase from 'firebase';
 
-const registerNewUser = async (email, password) => {
+const registerNewUser = async () => {
     await Firebase.auth().setPersistence(Firebase.auth.Auth.Persistence.LOCAL);
-    return Firebase.auth().createUserWithEmailAndPassword(email, password);
+    return Firebase.auth().signInAnonymously();
 };
 
-const loginUser = async (email, password) => {
-    await Firebase.auth().setPersistence(Firebase.auth.Auth.Persistence.LOCAL);
-    return Firebase.auth().signInWithEmailAndPassword(email, password);
-};
+// TODO link account!
 
-export { registerNewUser, loginUser };
+// const loginUser = async (email, password) => {
+//     await Firebase.auth().setPersistence(Firebase.auth.Auth.Persistence.LOCAL);
+//     return Firebase.auth().signInWithEmailAndPassword(email, password);
+// };
+
+export { registerNewUser };

@@ -1,4 +1,4 @@
-import AuthScreen from '../../screens/Auth/AuthScreen';
+import EntryScreen from '../../screens/Entry/EntryScreen';
 
 import AppRouter from './AppRouter';
 
@@ -14,7 +14,7 @@ const options = {
 
 const routeList = [
     // public
-    { key: 'auth', name: 'auth', component: AuthScreen, options },
+    { key: 'auth', name: 'auth', component: EntryScreen, options },
     // app
     { key: 'app', name: 'app', component: AppRouter, options },
 ];

@@ -12,4 +12,6 @@ export default {
     [keys.FIRE_GEM]: 'Pedra de Fogo',
     [keys.EARTH_GEM]: 'Pedra de Terra',
     [keys.WIND_GEM]: 'Pedra de Ar',
+
+    [keys.NORMAL_HERO_CHEST]: 'Baú Normal de Heróis',
 };
