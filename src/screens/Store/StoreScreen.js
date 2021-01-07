@@ -10,6 +10,8 @@ import { setPlayerResources } from '../../application/store/modules/player/actio
 
 import styles from './StoreScreenStyles';
 
+import { keys, translate } from '../../locale';
+
 import Header from '../../components/Header';
 
 function StoreScreen({ navigation }) {
@@ -42,7 +44,7 @@ function StoreScreen({ navigation }) {
             <View style={styles.container}>
                 <Button
                     onPress={() => openNormalChest(1)}
-                    title='Buy Normal Chest (100 Diamond)'
+                    title={translate(keys.BUY_NORMAL_CHEST)}
                     color='#841584'
                 />
 
@@ -50,7 +52,10 @@ function StoreScreen({ navigation }) {
                     <Text key={summon.hero.id}>
                         -&nbsp;
                         {summon.hero.basicInfo.name}
-                        ({summon.amount} medals)
+                        (
+                        {summon.amount}
+                        {' '}
+                        medals)
                     </Text>
                 ))}
             </View>
