@@ -34,13 +34,12 @@ function StoreScreen({ navigation }) {
     }, []);
 
     const openNormalChest = async (amount = 1) => {
-        const price = await getNormalHeroChestPrice(amount);
-        if (!playerHasResource(resources, price)) {
+        if (!await playerHasResource(resources, normalChestPrice)) {
             // TODO feedback!
             return;
         }
         // TODO remove dispatch and listen to database (or do the opposite)
-        const newResources = await removePlayerResource(resources, price);
+        const newResources = await removePlayerResource(resources, normalChestPrice);
         dispatch(setPlayerResources(newResources));
 
         const heroes = await openNormalHeroChest(amount);
