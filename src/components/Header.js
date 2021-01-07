@@ -14,7 +14,6 @@ function Header() {
     };
 
     useEffect(() => {
-        // eslint-disable-next-line no-console
         console.log(resources);
     }, [resources]);
 
