@@ -22,7 +22,7 @@ function MainRouter() {
     }
 
     return (
-        <Stack.Navigator initialRouteName='login'>
+        <Stack.Navigator initialRouteName='auth'>
             {renderRoutes()}
         </Stack.Navigator>
     );

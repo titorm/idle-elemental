@@ -7,10 +7,9 @@ import { registerNewUser, loginUser } from '../../application/api/methods/userAp
 
 import PageHeader from '../../components/PageHeader';
 
-import styles from './LoginScreenStyles';
+import styles from './AuthScreenStyles';
 
-function LoginScreen(props) {
-    const { navigation } = props;
+function AuthScreen({ navigation }) {
     const { user } = useSelector((state) => state.user || {});
     const isAndroid = Platform.OS === 'android';
 
@@ -115,4 +114,4 @@ function LoginScreen(props) {
     );
 }
 
-export default LoginScreen;
+export default AuthScreen;

@@ -1,44 +1,28 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { View, Button, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { CURRENCIES } from '../../application/constants/currencyConstants';
 
-import { openNormalHeroChest } from '../../application/services/chest/chestHeroService';
 import { generatePlayerCurrenciesOvertime } from '../../application/services/currency/currencyService';
-import { getNormalHeroChestPrice } from '../../application/services/price/priceService';
-import { setResourcesToPlayer, playerHasResource, removePlayerResource } from '../../application/services/player/playerResourceService';
+import { setResourcesToPlayer } from '../../application/services/player/playerResourceService';
 import { setTimesToPlayer } from '../../application/services/player/playerTimesService';
 
 import { setPlayerResources, setPlayerTimes } from '../../application/store/modules/player/actions';
 
-import styles from './SummonScreenStyles';
+import styles from './AdventureScreenStyles';
 
 import Header from '../../components/Header';
 
-function SummonScreen({ navigation }) {
+function AdventureScreen({ navigation }) {
     const dispatch = useDispatch();
-    const [summonedHeroes, setSummonedHeroes] = useState([]);
     const { resources, multipliers, times } = useSelector((state) => state.player || {});
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: 'Summons',
+            title: 'Adventure',
         });
     }, [navigation]);
-
-    const openNormalChest = async (amount = 1) => {
-        const price = await getNormalHeroChestPrice(amount);
-        if (!playerHasResource(resources, price)) {
-            // TODO feedback!
-            return;
-        }
-        const newResources = await removePlayerResource(resources, price);
-        dispatch(setPlayerResources(newResources));
-
-        const heroes = await openNormalHeroChest(amount);
-        setSummonedHeroes(heroes);
-    };
 
     const collectResources = async () => {
         const now = new Date().getTime();
@@ -59,20 +43,6 @@ function SummonScreen({ navigation }) {
         <>
             <Header />
             <View style={styles.container}>
-                <Button
-                    onPress={() => openNormalChest(1)}
-                    title='Buy Normal Chest (100 Diamond)'
-                    color='#841584'
-                />
-
-                {summonedHeroes.map((summon) => (
-                    <Text key={summon.hero.id}>
-                        -&nbsp;
-                        {summon.hero.basicInfo.name}
-                        ({summon.amount} medals)
-                    </Text>
-                ))}
-
                 <Text>
                     Diamonds:&nbsp;
                     {resources[CURRENCIES.DIAMOND] || 0}
@@ -95,4 +65,4 @@ function SummonScreen({ navigation }) {
     );
 }
 
-export default SummonScreen;
+export default AdventureScreen;
