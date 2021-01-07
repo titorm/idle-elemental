@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Button, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -18,6 +18,7 @@ import Header from '../../components/Header';
 function StoreScreen({ navigation }) {
     const dispatch = useDispatch();
     const [summonedHeroes, setSummonedHeroes] = useState([]);
+    const [normalChestPrice, setNormalChestPrice] = useState([]);
     const { resources } = useSelector((state) => state.player || {});
 
     useLayoutEffect(() => {
@@ -25,6 +26,12 @@ function StoreScreen({ navigation }) {
             title: 'Store',
         });
     }, [navigation]);
+
+    useEffect(() => {
+        (async () => {
+            setNormalChestPrice(await getNormalHeroChestPrice(1));
+        })();
+    }, []);
 
     const openNormalChest = async (amount = 1) => {
         const price = await getNormalHeroChestPrice(amount);
@@ -45,11 +52,13 @@ function StoreScreen({ navigation }) {
         <>
             <Header />
             <View style={styles.container}>
-                <Button
-                    onPress={() => openNormalChest(1)}
-                    title={translate(keys.BUY_NORMAL_CHEST)}
-                    color='#841584'
-                />
+                {!!normalChestPrice[0] && (
+                    <Button
+                        onPress={() => openNormalChest(1)}
+                        title={`${translate(keys.NORMAL_HERO_CHEST)} (${normalChestPrice[0].amount} ${translate(keys[normalChestPrice[0].currency])})`}
+                        color='#841584'
+                    />
+                )}
 
                 {summonedHeroes.map((summon) => (
                     <Text key={summon.hero.id}>
