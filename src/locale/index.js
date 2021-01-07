@@ -1,9 +1,9 @@
 import { Platform, NativeModules } from 'react-native';
 import I18n from 'i18n-js';
 
-import en from './en-US'; // importa o objeto de traduções para o idioma inglês
-import pt from './pt-BR'; // importa o objeto de traduções para o idioma português
-import keys from './keys';
+import keys from './keys/keys';
+import en from './en-US/en-US'; // importa o objeto de traduções para o idioma inglês
+import pt from './pt-BR/pt-BR'; // importa o objeto de traduções para o idioma português
 
 // Função que irá nos auxiliar a normalizar as traduções que serão recebidas pela função getLanguageByDevice
 // Isso é necessário pois no android e no iOS o retorno do mesmo idioma pode ser diferente

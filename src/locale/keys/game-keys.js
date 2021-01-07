@@ -1,0 +1,49 @@
+const currencies = {
+    GOLD: 'GOLD',
+    DIAMOND: 'DIAMOND',
+    XP: 'XP',
+    WATER_ESSENCE: 'WATER_ESSENCE',
+    FIRE_ESSENCE: 'FIRE_ESSENCE',
+    EARTH_ESSENCE: 'EARTH_ESSENCE',
+    WIND_ESSENCE: 'WIND_ESSENCE',
+    WATER_GEM: 'WATER_GEM',
+    FIRE_GEM: 'FIRE_GEM',
+    EARTH_GEM: 'EARTH_GEM',
+    WIND_GEM: 'WIND_GEM',
+};
+
+const mechanics = {
+    COMMON: 'COMMON',
+    RARE: 'RARE',
+    EPIC: 'EPIC',
+    LEGENDARY: 'LEGENDARY',
+    MYTHIC: 'MYTHIC',
+    DIVINE: 'DIVINE',
+    WATER: 'WATER',
+    FIRE: 'FIRE',
+    EARTH: 'EARTH',
+    WIND: 'WIND',
+    BEAST: 'BEAST',
+    UNDEAD: 'UNDEAD',
+    CELESTIAL: 'CELESTIAL',
+    DRAGON: 'DRAGON',
+    CENTAUR: 'CENTAUR',
+    SKELETON: 'SKELETON',
+    ANGEL: 'ANGEL',
+    ULTIMATE: 'ULTIMATE',
+    ACTIVE: 'ACTIVE',
+    PASSIVE: 'PASSIVE',
+};
+
+const chests = {
+    NORMAL_HERO_CHEST: 'NORMAL_HERO_CHEST',
+    BRONZE_HERO_CHEST: 'BRONZE_HERO_CHEST',
+    SILVER_HERO_CHEST: 'SILVER_HERO_CHEST',
+    GOLD_HERO_CHEST: 'GOLD_HERO_CHEST',
+};
+
+export default {
+    ...currencies,
+    ...mechanics,
+    ...chests,
+};
