@@ -15,7 +15,6 @@ function AppContent() {
     const dispatch = useDispatch();
 
     Firebase.auth().onAuthStateChanged(async (user) => {
-        console.log(user);
         if (user && user.uid) {
             let player = await getCurrentPlayer();
             if (!player) {
