@@ -1,5 +1,5 @@
 import { getDocumentData } from '../api';
 
-const getBaseSummonHeroesPrices = () => getDocumentData('prices', 'SUMMON_HEROES');
+const getChestPrices = () => getDocumentData('prices', 'CHEST');
 
-export { getBaseSummonHeroesPrices };
+export { getChestPrices };

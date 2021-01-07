@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { CURRENCIES } from '../../application/constants/currencyConstants';
 
-import { summon } from '../../application/services/summon/summonService';
+import { openNormalHeroChest } from '../../application/services/chest/chestHeroService';
 import { generatePlayerCurrenciesOvertime } from '../../application/services/currency/currencyService';
-import { getNormalSummonHeroesPrice } from '../../application/services/price/priceService';
+import { getNormalHeroChestPrice } from '../../application/services/price/priceService';
 import { setResourcesToPlayer, playerHasResource, removePlayerResource } from '../../application/services/player/playerResourceService';
 import { setTimesToPlayer } from '../../application/services/player/playerTimesService';
 
@@ -26,8 +26,8 @@ function SummonScreen(props) {
         });
     }, [navigation]);
 
-    const doSummon = async (amount = 1) => {
-        const price = await getNormalSummonHeroesPrice(amount);
+    const openNormalChest = async (amount = 1) => {
+        const price = await getNormalHeroChestPrice(amount);
         if (!playerHasResource(resources, price)) {
             // TODO feedback!
             return;
@@ -35,7 +35,7 @@ function SummonScreen(props) {
         const newResources = await removePlayerResource(resources, price);
         dispatch(setPlayerResources(newResources));
 
-        const heroes = await summon(amount);
+        const heroes = await openNormalHeroChest(amount);
         setSummonedHeroes(heroes);
     };
 
@@ -57,13 +57,8 @@ function SummonScreen(props) {
     return (
         <View style={styles.container}>
             <Button
-                onPress={() => doSummon(1)}
-                title='Summon 1x (300 Diamond)'
-                color='#841584'
-            />
-            <Button
-                onPress={() => doSummon(10)}
-                title='Summon 10x (2700 Diamond)'
+                onPress={() => openNormalChest(1)}
+                title='Buy Normal Chest (100 Diamond)'
                 color='#841584'
             />
 

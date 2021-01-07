@@ -1,8 +1,8 @@
-const CHEST_TYPE = {
-    NORMAL: 'NORMAL',
-    BRONZE: 'BRONZE',
-    SILVER: 'SILVER',
-    GOLD: 'GOLD',
+const HERO_CHEST_TYPE = {
+    NORMAL: 'NORMAL_HERO_CHEST',
+    BRONZE: 'BRONZE_HERO_CHEST',
+    SILVER: 'SILVER_HERO_CHEST',
+    GOLD: 'GOLD_HERO_CHEST',
 };
 
-export { CHEST_TYPE };
+export { HERO_CHEST_TYPE };
