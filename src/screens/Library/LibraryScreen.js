@@ -1,15 +1,15 @@
 import React, { useLayoutEffect } from 'react';
 import { View } from 'react-native';
 
-import styles from './PlayerScreenStyles';
+import styles from './LibraryScreenStyles';
 
 import Header from '../../components/Header';
-import PlayerHeroScreen from './Hero/PlayerHeroScreen';
+import LibraryHeroScreen from './Hero/LibraryHeroScreen';
 
-function PlayerScreen({ navigation }) {
+function LibraryScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: 'Player',
+            title: 'Library',
         });
     }, [navigation]);
 
@@ -17,10 +17,10 @@ function PlayerScreen({ navigation }) {
         <>
             <Header />
             <View style={styles.container}>
-                <PlayerHeroScreen />
+                <LibraryHeroScreen />
             </View>
         </>
     );
 }
 
-export default PlayerScreen;
+export default LibraryScreen;

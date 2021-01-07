@@ -8,16 +8,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // import { setPlayerResources } from '../../application/store/modules/player/actions';
 
-function PlayerHeroScreen() {
+function LibraryHeroScreen() {
     const dispatch = useDispatch();
-    const [summonedHeroes, setSummonedHeroes] = useState([]);
-    const { resources } = useSelector((state) => state.player || {});
+    const { heroes } = useSelector((state) => state.player || {});
 
     return (
         <View>
-            <Text>hero list</Text>
+            {heroes.map((hero) => (
+                <Text>{hero.basicInfo.name}</Text>
+            ))}
         </View>
     );
 }
 
-export default PlayerHeroScreen;
+export default LibraryHeroScreen;

@@ -62,6 +62,15 @@ const createPlayerInitialData = async () => {
 };
 
 const getCurrentPlayer = () => getPlayer();
-const getCurrentPlayerHeroes = () => getPlayerHeroes();
+
+const getCurrentPlayerHeroes = async () => {
+    const heroList = await getHeroList();
+    const playerHeroes = await getPlayerHeroes();
+
+    return playerHeroes.map((playerHero) => ({
+        ...heroList.find((hero) => hero.id === playerHero.id),
+        playerInfo: playerHero,
+    }));
+};
 
 export { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData };
