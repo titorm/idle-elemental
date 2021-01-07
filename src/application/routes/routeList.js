@@ -1,5 +1,6 @@
 import LoginScreen from '../../screens/Sign/LoginScreen';
-import SummonScreen from '../../screens/Summon/SummonScreen';
+
+import AppRouter from './AppRouter';
 
 const options = {
     headerStyle: {
@@ -15,7 +16,7 @@ const routeList = [
     // public
     { key: 'login', name: 'login', component: LoginScreen, options },
     // app
-    { key: 'summon', name: 'summon', component: SummonScreen, options },
+    { key: 'app', name: 'app', component: AppRouter, options },
 ];
 
 export default routeList;

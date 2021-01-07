@@ -48,7 +48,7 @@ function LoginScreen(props) {
     const navigateToApplication = () => {
         navigation.reset({
             index: 0,
-            routes: [{ name: 'summon' }],
+            routes: [{ name: 'app' }],
         });
     };
 
