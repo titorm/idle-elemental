@@ -46,14 +46,14 @@ const getSubCollectionDocumentData = async (collectionName, docID, subCollection
 const setSubCollectionDocumentData = async (collectionName, docID, subCollectionName, subDocID, data) => {
     const baseDoc = await getDocument(getCollection(collectionName), docID);
     const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
-    const doc = await getDocument(baseDocCollection, subDocID).get();
+    const doc = await getDocument(baseDocCollection, subDocID);
     return doc.set(data, { merge: true });
 };
 
 const updateSubCollectionDocumentData = async (collectionName, docID, subCollectionName, subDocID, data) => {
     const baseDoc = await getDocument(getCollection(collectionName), docID);
     const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
-    const doc = await getDocument(baseDocCollection, subDocID).get();
+    const doc = await getDocument(baseDocCollection, subDocID);
     return doc.update(data, { merge: true });
 };
 
@@ -61,7 +61,7 @@ const incrementSubCollectionDocumentData = async (collectionName, docID, subColl
     const increment = Firebase.firestore.FieldValue.increment(incrementValue);
     const baseDoc = await getDocument(getCollection(collectionName), docID);
     const baseDocCollection = await getSubCollection(baseDoc, subCollectionName);
-    const doc = await getDocument(baseDocCollection, subDocID).get();
+    const doc = await getDocument(baseDocCollection, subDocID);
     return doc.update({ [field]: increment }, { merge: true });
 };
 

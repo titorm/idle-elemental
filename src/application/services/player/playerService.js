@@ -1,6 +1,6 @@
 import { CURRENCIES } from '../../constants/currencyConstants';
 
-import { getPlayer, setPlayer, getPlayerHeroes, setPlayerHeroes } from '../../api/methods/playerApi';
+import { getPlayer, setPlayer, getPlayerHeroes, setPlayerHeroes, addPlayerHero } from '../../api/methods/playerApi';
 import { getHeroList } from '../../api/methods/heroApi';
 
 const getStartingPlayerConfig = () => ({
@@ -67,10 +67,22 @@ const getCurrentPlayerHeroes = async () => {
     const heroList = await getHeroList();
     const playerHeroes = await getPlayerHeroes();
 
-    return playerHeroes.map((playerHero) => ({
-        ...heroList.find((hero) => hero.id === playerHero.id),
-        playerInfo: playerHero,
-    }));
+    const finalHeroList = [];
+    heroList.forEach(async (hero) => {
+        let playerHero = playerHeroes.find((elem) => elem.id === hero.id);
+        if (!playerHero) {
+            playerHero = getBaseHero();
+            await addPlayerHero(hero.id, playerHero);
+        }
+        finalHeroList.push({
+            id: hero.id,
+            gameInfo: hero,
+            playerInfo: playerHero,
+            combatInfo: {}, // TODO
+        });
+    });
+
+    return finalHeroList;
 };
 
 export { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData };

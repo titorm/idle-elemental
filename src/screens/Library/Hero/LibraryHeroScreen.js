@@ -15,7 +15,7 @@ function LibraryHeroScreen() {
     return (
         <View>
             {heroes.map((hero) => (
-                <Text>{hero.basicInfo.name}</Text>
+                <Text key={hero.id}>{hero.gameInfo.basicInfo.name}</Text>
             ))}
         </View>
     );
