@@ -1,5 +1,5 @@
-import keys from '../keys';
+import game from './game-en-US';
 
 export default {
-    [keys.BUY_NORMAL_CHEST]: 'Buy Normal Chest (100 Diamonds)',
+    ...game,
 };
