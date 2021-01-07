@@ -33,6 +33,7 @@ function AdventureScreen({ navigation }) {
             newResources[res] = (newResources[res] || 0) + (generatedResources[res] || 0);
         });
 
+        // TODO remove dispatch and listen to database (or do the opposite)
         await setResourcesToPlayer(newResources);
         await setTimesToPlayer(newTimes);
         dispatch(setPlayerResources(newResources));

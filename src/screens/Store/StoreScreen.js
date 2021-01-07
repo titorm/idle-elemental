@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { openNormalHeroChest } from '../../application/services/chest/chestHeroService';
 import { getNormalHeroChestPrice } from '../../application/services/price/priceService';
+import { addHeroMedalsToPlayer } from '../../application/services/player/playerHeroService';
 import { playerHasResource, removePlayerResource } from '../../application/services/player/playerResourceService';
 
 import { setPlayerResources } from '../../application/store/modules/player/actions';
@@ -29,10 +30,12 @@ function StoreScreen({ navigation }) {
             // TODO feedback!
             return;
         }
+        // TODO remove dispatch and listen to database (or do the opposite)
         const newResources = await removePlayerResource(resources, price);
         dispatch(setPlayerResources(newResources));
 
         const heroes = await openNormalHeroChest(amount);
+        await addHeroMedalsToPlayer(heroes);
         setSummonedHeroes(heroes);
     };
 
@@ -42,7 +45,7 @@ function StoreScreen({ navigation }) {
             <View style={styles.container}>
                 <Button
                     onPress={() => openNormalChest(1)}
-                    title='Buy Normal Chest (100 Diamond)'
+                    title='Buy Normal Chest (100 Diamonds)'
                     color='#841584'
                 />
 
