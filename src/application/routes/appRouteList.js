@@ -6,6 +6,7 @@ import Icon from '../../components/Icon';
 
 import AdventureScreen from '../../screens/Adventure/AdventureScreen';
 import StoreScreen from '../../screens/Store/StoreScreen';
+import PlayerScreen from '../../screens/Player/PlayerScreen';
 
 const iconTab = (color, size, name) => (
     <Icon
@@ -24,6 +25,7 @@ const options = (title, icon) => ({
 const privateRouteList = [
     { key: 'store', name: 'store', component: StoreScreen, options: options('Store', icons.store) },
     { key: 'adventure', name: 'adventure', component: AdventureScreen, options: options('Adventure', icons.fire) },
+    { key: 'player', name: 'player', component: PlayerScreen, options: options('Player', icons.user) },
 ];
 
 export default privateRouteList;
