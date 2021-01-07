@@ -1,5 +1,5 @@
 import Firebase from 'firebase';
-import { getDocumentData, setDocumentData, updateDocumentData, getSubCollectionData, updateSubCollectionDocumentData, addBatchSubData } from '../api';
+import { getDocumentData, setDocumentData, updateDocumentData, getSubCollectionData, setSubCollectionDocumentData, updateSubCollectionDocumentData, addBatchSubData } from '../api';
 
 const setPlayer = (newData) => setDocumentData('players', Firebase.auth().currentUser.uid, newData); // Only used for initial set!
 const getPlayer = () => getDocumentData('players', Firebase.auth().currentUser.uid);
@@ -11,6 +11,7 @@ const updatePlayerMultipliers = (newData) => updateDocumentData('players', Fireb
 const updatePlayerResources = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, { resources: newData });
 const updatePlayerTimes = (newData) => updateDocumentData('players', Firebase.auth().currentUser.uid, { times: newData });
 const updatePlayerHeroes = (newData) => updateSubCollectionDocumentData('players', Firebase.auth().currentUser.uid, 'heroes', newData);
+const addPlayerHero = (id, newData) => setSubCollectionDocumentData('players', Firebase.auth().currentUser.uid, 'heroes', id, newData);
 
 export {
     setPlayer,
@@ -23,4 +24,5 @@ export {
     updatePlayerMultipliers,
     updatePlayerTimes,
     updatePlayerHeroes,
+    addPlayerHero,
 };
