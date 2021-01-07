@@ -7,7 +7,7 @@ const getHeroesChestPrice = async (chestType, amount = 1) => {
     const basePrice = prices[chestType];
     if (!basePrice) return null;
 
-    return prices.map((elem) => ({ ...elem, amount: elem.amount * amount }));
+    return basePrice.map((elem) => ({ ...elem, amount: elem.amount * amount }));
 };
 
 const getNormalHeroChestPrice = (amount = 1) => getHeroesChestPrice(HERO_CHEST_TYPE.NORMAL, amount);

@@ -65,10 +65,11 @@ function SummonScreen({ navigation }) {
                     color='#841584'
                 />
 
-                {summonedHeroes.map((hero) => (
-                    <Text key={hero.id}>
+                {summonedHeroes.map((summon) => (
+                    <Text key={summon.hero.id}>
                         -&nbsp;
-                        {hero.basicInfo.name}
+                        {summon.hero.basicInfo.name}
+                        ({summon.amount} medals)
                     </Text>
                 ))}
 
