@@ -1,4 +1,4 @@
-import { RARITIES } from '../constants';
+import { RARITIES } from '../../constants/mechanicConstants';
 
 import { getHeroList } from '../../api/methods/heroApi';
 import { getSummonHeroesRate } from '../../api/methods/rateApi';

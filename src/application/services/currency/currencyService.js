@@ -1,4 +1,4 @@
-import { CURRENCIES } from '../constants';
+import { CURRENCIES } from '../../constants/currencyConstants';
 
 import { getDropEssentialRates } from '../../api/methods/rateApi';
 

@@ -1,4 +1,4 @@
-import { CURRENCIES } from '../constants';
+import { CURRENCIES } from '../../constants/currencyConstants';
 
 import { getPlayer, setPlayer, getPlayerHeroes, setPlayerHeroes } from '../../api/methods/playerApi';
 import { getHeroList } from '../../api/methods/heroApi';

@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import { View, Button, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { CURRENCIES } from '../../application/services/constants';
+import { CURRENCIES } from '../../application/constants/currencyConstants';
 
 import { summon } from '../../application/services/summon/summonService';
 import { generatePlayerCurrenciesOvertime } from '../../application/services/currency/currencyService';
