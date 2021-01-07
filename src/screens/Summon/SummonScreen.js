@@ -32,7 +32,7 @@ function SummonScreen(props) {
             // TODO feedback!
             return;
         }
-        const newResources = removePlayerResource(resources, price);
+        const newResources = await removePlayerResource(resources, price);
         dispatch(setPlayerResources(newResources));
 
         const heroes = await summon(amount);
@@ -42,13 +42,11 @@ function SummonScreen(props) {
     const collectResources = async () => {
         const now = new Date().getTime();
         const generatedResources = await generatePlayerCurrenciesOvertime(multipliers, Math.floor((now - times.lastCollect) / 1000));
-        console.log(generatedResources);
         const newResources = { ...resources };
         const newTimes = { ...times, lastCollect: now };
         Object.keys(generatedResources).forEach((res) => {
             newResources[res] = (newResources[res] || 0) + (generatedResources[res] || 0);
         });
-
 
         await setResourcesToPlayer(newResources);
         await setTimesToPlayer(newTimes);
