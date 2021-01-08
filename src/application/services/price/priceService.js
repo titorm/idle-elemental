@@ -1,8 +1,10 @@
 import { HERO_CHEST_TYPE } from '../../constants/chestConstants';
 
 const getHeroesChestPrice = async (prices, chestType, amount = 1) => {
-    if (!prices.chest) return null;
-    const basePrice = prices.chest[chestType];
+    const chestPrices = prices.find((elem) => elem.id === 'CHEST');
+    if (!chestPrices) return null;
+
+    const basePrice = chestPrices[chestType];
     if (!basePrice) return null;
 
     return basePrice.map((elem) => ({ ...elem, amount: elem.amount * amount }));

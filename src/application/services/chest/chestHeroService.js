@@ -9,7 +9,8 @@ const randomlySelectHero = (heroList) => {
 };
 
 const openChest = async (heroes, rates, chestType, amount = 1) => {
-    const chestRates = rates[chestType];
+    const { id, ...chestRates } = rates.find((elem) => elem.id === chestType);
+    if (!chestRates) return [];
 
     const result = [];
     Object.keys(chestRates).forEach((rate) => {

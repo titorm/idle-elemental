@@ -5,10 +5,12 @@ const generateCurrency = (baseAmount = 0, multiplier = 1, seconds = 0) => {
 };
 
 const generatePlayerCurrenciesOvertime = async (rates, multipliers, amountOfSeconds = 0) => {
+    const essentialDropRates = rates.find((elem) => elem.id === 'DROP_ESSENTIAL');
+
     return {
-        [CURRENCIES.GOLD]: generateCurrency(rates[CURRENCIES.GOLD], multipliers[CURRENCIES.GOLD], amountOfSeconds),
-        [CURRENCIES.XP]: generateCurrency(rates[CURRENCIES.XP], multipliers[CURRENCIES.XP], amountOfSeconds),
-        [CURRENCIES.DIAMOND]: generateCurrency(rates[CURRENCIES.DIAMOND], multipliers[CURRENCIES.DIAMOND], amountOfSeconds),
+        [CURRENCIES.GOLD]: generateCurrency(essentialDropRates[CURRENCIES.GOLD], multipliers[CURRENCIES.GOLD], amountOfSeconds),
+        [CURRENCIES.XP]: generateCurrency(essentialDropRates[CURRENCIES.XP], multipliers[CURRENCIES.XP], amountOfSeconds),
+        [CURRENCIES.DIAMOND]: generateCurrency(essentialDropRates[CURRENCIES.DIAMOND], multipliers[CURRENCIES.DIAMOND], amountOfSeconds),
     };
 };
 

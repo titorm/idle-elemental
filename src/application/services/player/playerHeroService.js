@@ -1,8 +1,6 @@
-import { getPlayerHeroes, incrementPlayerHeroData, addPlayerHero } from '../../api/methods/playerHeroApi';
+import { incrementPlayerHeroData, addPlayerHero } from '../../api/methods/playerHeroApi';
 
-const getCurrentPlayerHeroes = async (gameHeroList) => {
-    const playerHeroes = await getPlayerHeroes();
-
+const mergeGameAndPlayerHeroes = (gameHeroList, playerHeroes) => {
     const finalHeroList = [];
     gameHeroList.forEach(async (hero) => {
         let playerHero = playerHeroes.find((elem) => elem.id === hero.id);
@@ -33,4 +31,4 @@ const addHeroMedalsToPlayer = async (list) => {
     });
 };
 
-export { getBaseHero, getCurrentPlayerHeroes, addHeroMedalsToPlayer };
+export { getBaseHero, mergeGameAndPlayerHeroes, addHeroMedalsToPlayer };

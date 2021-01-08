@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { View, Button, Text } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { CURRENCIES } from '../../application/constants/currencyConstants';
 
@@ -8,14 +8,11 @@ import { generatePlayerCurrenciesOvertime } from '../../application/services/cur
 import { setResourcesToPlayer } from '../../application/services/player/playerResourceService';
 import { setTimesToPlayer } from '../../application/services/player/playerTimesService';
 
-import { setPlayerResources, setPlayerTimes } from '../../application/store/modules/player/actions';
-
 import styles from './AdventureScreenStyles';
 
 import Header from '../../components/Header';
 
 function AdventureScreen({ navigation }) {
-    const dispatch = useDispatch();
     const { rates } = useSelector((state) => state.game || {});
     const { resources, multipliers, times } = useSelector((state) => state.player || {});
 
@@ -34,11 +31,8 @@ function AdventureScreen({ navigation }) {
             newResources[res] = (newResources[res] || 0) + (generatedResources[res] || 0);
         });
 
-        // TODO remove dispatch and listen to database (or do the opposite)
         await setResourcesToPlayer(newResources);
         await setTimesToPlayer(newTimes);
-        dispatch(setPlayerResources(newResources));
-        dispatch(setPlayerTimes(newTimes));
     };
 
     return (

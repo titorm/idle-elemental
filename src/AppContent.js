@@ -8,20 +8,21 @@ import Router from './application/routes/Router';
 
 import { getGameData } from './application/services/game/gameService';
 import { getCurrentPlayer, createPlayerInitialData } from './application/services/player/playerService';
-// import { getCurrentPlayer, createPlayerInitialData } from './application/services/player/playerHeroService';
+import { mergeGameAndPlayerHeroes } from './application/services/player/playerHeroService';
 
 import { setAppLoaded } from './application/store/modules/app/actions';
 import { setGameData } from './application/store/modules/game/actions';
-import { setPlayerData } from './application/store/modules/player/actions';
+import { setPlayerData, setPlayerHeroes } from './application/store/modules/player/actions';
 import { setUser, setUserConfig } from './application/store/modules/user/actions';
 
 function AppContent() {
     const dispatch = useDispatch();
     const { appLoaded } = useSelector((state) => state.app || {});
+    const { heroes } = useSelector((state) => state.game || {});
 
     Firebase.auth().onAuthStateChanged(async (user) => {
         if (!appLoaded) {
-            setGameData(await getGameData());
+            dispatch(setGameData(await getGameData()));
             dispatch(setAppLoaded(true));
         }
 
@@ -45,12 +46,13 @@ function AppContent() {
             dispatch(setUserConfig(newData.config));
             dispatch(setPlayerData(newData));
         });
-        userDoc.collection('heroes').onSnapshot(async (collection) => {
+        userDoc.collection('heroes').onSnapshot((collection) => {
+            const playerHeroes = [];
             collection.forEach((elem) => {
-                console.log(elem.data());
+                playerHeroes.push({ id: elem.id, ...elem.data() });
             });
-            // dispatch(setPlayerHeroes());
-            // setPlayer(doc.data());
+            const mergedHeroes = mergeGameAndPlayerHeroes(heroes, playerHeroes);
+            dispatch(setPlayerHeroes(mergedHeroes));
         });
         // TODO unsubscribe();
     };
