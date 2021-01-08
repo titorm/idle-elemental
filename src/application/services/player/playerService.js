@@ -1,8 +1,11 @@
 import { CURRENCIES } from '../../constants/currencyConstants';
 
-import { getPlayer, setPlayer, getPlayerHeroes, setPlayerHeroes, addPlayerHero } from '../../api/methods/playerApi';
-import { getHeroList } from '../../api/methods/heroApi';
+import { getPlayer, setPlayer } from '../../api/methods/playerApi';
+import { setPlayerHeroes } from '../../api/methods/playerHeroApi';
 
+import { getBaseHero } from './playerHeroService';
+
+// Starting
 const getStartingPlayerConfig = () => ({
     roles: ['PLAYER'],
 });
@@ -32,19 +35,13 @@ const getStartingPlayerMultipliers = () => {
     return baseMultipliers;
 };
 
-const getStartingPlayerHeroes = async () => {
-    const heroList = await getHeroList();
+const getStartingPlayerHeroes = (gameHeroList) => {
     const baseHero = getBaseHero();
-    return heroList.map((hero) => ({ id: hero.id, ...baseHero }));
+    return gameHeroList.map((hero) => ({ id: hero.id, ...baseHero }));
 };
 
-const getBaseHero = () => ({
-    stars: 0,
-    ascension: 0,
-    medals: 0,
-});
-
-const createPlayerInitialData = async () => {
+// Export
+const createPlayerInitialData = async (gameHeroList) => {
     const config = getStartingPlayerConfig();
     const times = getStartingPlayerTimes();
     const resources = getStartingPlayerResources();
@@ -57,32 +54,10 @@ const createPlayerInitialData = async () => {
         multipliers,
     });
 
-    const startingHeroes = await getStartingPlayerHeroes();
+    const startingHeroes = getStartingPlayerHeroes(gameHeroList);
     await setPlayerHeroes(startingHeroes);
 };
 
 const getCurrentPlayer = () => getPlayer();
 
-const getCurrentPlayerHeroes = async () => {
-    const heroList = await getHeroList();
-    const playerHeroes = await getPlayerHeroes();
-
-    const finalHeroList = [];
-    heroList.forEach(async (hero) => {
-        let playerHero = playerHeroes.find((elem) => elem.id === hero.id);
-        if (!playerHero) {
-            playerHero = getBaseHero();
-            await addPlayerHero(hero.id, playerHero);
-        }
-        finalHeroList.push({
-            id: hero.id,
-            gameInfo: hero,
-            playerInfo: playerHero,
-            combatInfo: {}, // TODO
-        });
-    });
-
-    return finalHeroList;
-};
-
-export { getCurrentPlayer, getCurrentPlayerHeroes, createPlayerInitialData };
+export { getCurrentPlayer, createPlayerInitialData };

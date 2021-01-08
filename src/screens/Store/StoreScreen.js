@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Button, Text } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { openNormalHeroChest } from '../../application/services/chest/chestHeroService';
 import { getNormalHeroChestPrice } from '../../application/services/price/priceService';
 import { addHeroMedalsToPlayer } from '../../application/services/player/playerHeroService';
 import { playerHasResource, removePlayerResource } from '../../application/services/player/playerResourceService';
-
-import { setPlayerResources } from '../../application/store/modules/player/actions';
 
 import styles from './StoreScreenStyles';
 
@@ -16,7 +14,6 @@ import { keys, translate } from '../../locale';
 import Header from '../../components/Header';
 
 function StoreScreen({ navigation }) {
-    const dispatch = useDispatch();
     const [summonedHeroes, setSummonedHeroes] = useState([]);
     const [normalChestPrice, setNormalChestPrice] = useState([]);
     const { resources } = useSelector((state) => state.player || {});
@@ -38,10 +35,7 @@ function StoreScreen({ navigation }) {
             // TODO feedback!
             return;
         }
-        // TODO remove dispatch and listen to database (or do the opposite)
-        const newResources = await removePlayerResource(resources, normalChestPrice);
-        dispatch(setPlayerResources(newResources));
-
+        await removePlayerResource(resources, normalChestPrice);
         const heroes = await openNormalHeroChest(amount);
         await addHeroMedalsToPlayer(heroes);
         setSummonedHeroes(heroes);
