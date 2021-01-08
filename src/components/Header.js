@@ -14,7 +14,7 @@ function Header() {
     };
 
     useEffect(() => {
-        console.log(resources);
+        // console.log(resources);
     }, [resources]);
 
     return (

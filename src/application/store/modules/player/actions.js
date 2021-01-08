@@ -1,4 +1,11 @@
-import { SET_PLAYER_RESOURCES, SET_PLAYER_MULTIPLIERS, SET_PLAYER_TIMES, SET_PLAYER_HEROES } from './constants';
+import { SET_PLAYER_DATA, SET_PLAYER_RESOURCES, SET_PLAYER_MULTIPLIERS, SET_PLAYER_TIMES, SET_PLAYER_HEROES } from './constants';
+
+export function setPlayerData(payload) {
+    return {
+        type: SET_PLAYER_DATA,
+        payload,
+    };
+}
 
 export function setPlayerResources(payload) {
     return {

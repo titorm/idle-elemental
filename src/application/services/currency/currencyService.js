@@ -1,18 +1,16 @@
 import { CURRENCIES } from '../../constants/currencyConstants';
 
-import { getDropEssentialRates } from '../../api/methods/rateApi';
-
 const generateCurrency = (baseAmount = 0, multiplier = 1, seconds = 0) => {
     return baseAmount * multiplier * seconds;
 };
 
-const generatePlayerCurrenciesOvertime = async (playerMultipliers, amountOfSeconds = 0) => {
-    const baseDropRates = await getDropEssentialRates();
+const generatePlayerCurrenciesOvertime = async (rates, multipliers, amountOfSeconds = 0) => {
+    const essentialDropRates = rates.find((elem) => elem.id === 'DROP_ESSENTIAL');
 
     return {
-        [CURRENCIES.GOLD]: generateCurrency(baseDropRates[CURRENCIES.GOLD], playerMultipliers[CURRENCIES.GOLD], amountOfSeconds),
-        [CURRENCIES.XP]: generateCurrency(baseDropRates[CURRENCIES.XP], playerMultipliers[CURRENCIES.XP], amountOfSeconds),
-        [CURRENCIES.DIAMOND]: generateCurrency(baseDropRates[CURRENCIES.DIAMOND], playerMultipliers[CURRENCIES.DIAMOND], amountOfSeconds),
+        [CURRENCIES.GOLD]: generateCurrency(essentialDropRates[CURRENCIES.GOLD], multipliers[CURRENCIES.GOLD], amountOfSeconds),
+        [CURRENCIES.XP]: generateCurrency(essentialDropRates[CURRENCIES.XP], multipliers[CURRENCIES.XP], amountOfSeconds),
+        [CURRENCIES.DIAMOND]: generateCurrency(essentialDropRates[CURRENCIES.DIAMOND], multipliers[CURRENCIES.DIAMOND], amountOfSeconds),
     };
 };
 

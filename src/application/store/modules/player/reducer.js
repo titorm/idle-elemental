@@ -1,4 +1,4 @@
-import { SET_PLAYER_RESOURCES, SET_PLAYER_MULTIPLIERS, SET_PLAYER_TIMES, SET_PLAYER_HEROES } from './constants';
+import { SET_PLAYER_DATA, SET_PLAYER_RESOURCES, SET_PLAYER_MULTIPLIERS, SET_PLAYER_TIMES, SET_PLAYER_HEROES } from './constants';
 
 const INITIAL_STATE = {
     resources: {},
@@ -9,6 +9,8 @@ const INITIAL_STATE = {
 
 export default function filter(state = INITIAL_STATE, action) {
     switch (action.type) {
+    case SET_PLAYER_DATA:
+        return { ...state, ...action.payload };
     case SET_PLAYER_RESOURCES:
         return { ...state, resources: action.payload };
     case SET_PLAYER_MULTIPLIERS:
