@@ -161,7 +161,6 @@
 				822420C854EE3EC386CC57BA /* Pods-idle_elemental-tvOSTests.debug.xcconfig */,
 				60A40050548F9F29274D236D /* Pods-idle_elemental-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
