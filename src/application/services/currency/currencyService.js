@@ -1,18 +1,19 @@
-import { CURRENCIES } from '../../constants/currencyConstants';
+import { useSelector } from 'react-redux';
 
-import { getDropEssentialRates } from '../../api/methods/rateApi';
+import { CURRENCIES } from '../../constants/currencyConstants';
 
 const generateCurrency = (baseAmount = 0, multiplier = 1, seconds = 0) => {
     return baseAmount * multiplier * seconds;
 };
 
-const generatePlayerCurrenciesOvertime = async (playerMultipliers, amountOfSeconds = 0) => {
-    const baseDropRates = await getDropEssentialRates();
+const generatePlayerCurrenciesOvertime = async (amountOfSeconds = 0) => {
+    const { rates } = useSelector((state) => state.game || {});
+    const { multipliers } = useSelector((state) => state.player || {});
 
     return {
-        [CURRENCIES.GOLD]: generateCurrency(baseDropRates[CURRENCIES.GOLD], playerMultipliers[CURRENCIES.GOLD], amountOfSeconds),
-        [CURRENCIES.XP]: generateCurrency(baseDropRates[CURRENCIES.XP], playerMultipliers[CURRENCIES.XP], amountOfSeconds),
-        [CURRENCIES.DIAMOND]: generateCurrency(baseDropRates[CURRENCIES.DIAMOND], playerMultipliers[CURRENCIES.DIAMOND], amountOfSeconds),
+        [CURRENCIES.GOLD]: generateCurrency(rates[CURRENCIES.GOLD], multipliers[CURRENCIES.GOLD], amountOfSeconds),
+        [CURRENCIES.XP]: generateCurrency(rates[CURRENCIES.XP], multipliers[CURRENCIES.XP], amountOfSeconds),
+        [CURRENCIES.DIAMOND]: generateCurrency(rates[CURRENCIES.DIAMOND], multipliers[CURRENCIES.DIAMOND], amountOfSeconds),
     };
 };
 

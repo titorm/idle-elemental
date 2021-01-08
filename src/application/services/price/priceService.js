@@ -1,10 +1,10 @@
+import { useSelector } from 'react-redux';
+
 import { HERO_CHEST_TYPE } from '../../constants/chestConstants';
 
-import { getChestPrices } from '../../api/methods/priceApi';
-
 const getHeroesChestPrice = async (chestType, amount = 1) => {
-    const prices = await getChestPrices();
-    const basePrice = prices[chestType];
+    const { prices } = useSelector((state) => state.game || {});
+    const basePrice = prices.chest[chestType];
     if (!basePrice) return null;
 
     return basePrice.map((elem) => ({ ...elem, amount: elem.amount * amount }));

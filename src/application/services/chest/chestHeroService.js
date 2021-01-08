@@ -1,7 +1,6 @@
-import { HERO_CHEST_TYPE } from '../../constants/chestConstants';
+import { useSelector } from 'react-redux';
 
-import { getHeroList } from '../../api/methods/heroApi';
-import { getChestRate } from '../../api/methods/rateApi';
+import { HERO_CHEST_TYPE } from '../../constants/chestConstants';
 
 const getPossibleHeroes = (heroList, rarity, chestType) => {
     return heroList.filter((hero) => hero.category.rarity === rarity && hero.acquiredAt.includes(chestType));
@@ -12,11 +11,12 @@ const randomlySelectHero = (heroList) => {
 };
 
 const openChest = async (chestType, amount = 1) => {
-    const heroList = await getHeroList();
-    const chestRates = await getChestRate(chestType);
+    const { heroes, rates } = useSelector((state) => state.game || {});
+    const chestRates = rates[chestType];
+
     const result = [];
     Object.keys(chestRates).forEach((rate) => {
-        const possibleHeroList = getPossibleHeroes(heroList, rate, chestType);
+        const possibleHeroList = getPossibleHeroes(heroes, rate, chestType);
         for (let i = 0; i < amount; i++) {
             const hero = randomlySelectHero(possibleHeroList);
             const index = result.findIndex((elem) => elem.hero.id === hero.id);
