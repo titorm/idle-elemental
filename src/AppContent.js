@@ -32,24 +32,28 @@ function AppContent() {
                 player = await getCurrentPlayer();
             }
 
-            Firebase.firestore().collection('players').doc(user.uid).onSnapshot(async (doc) => {
-                const newData = doc.data();
-                dispatch(setUserConfig(newData.config));
-                dispatch(setPlayerData(newData));
-            });
-            Firebase.firestore().collection('players').doc(user.uid).collection('heroes')
-            .onSnapshot(async (collection) => {
-                collection.forEach((elem) => {
-                    console.log(elem.data());
-                });
-                // dispatch(setPlayerHeroes());
-                // setPlayer(doc.data());
-            });
-            // TODO unsubscribe();
+            createListeners(user.uid);
         }
 
         dispatch(setUser(user));
     });
+
+    const createListeners = (userID) => {
+        const userDoc = Firebase.firestore().collection('players').doc(userID);
+        userDoc.onSnapshot(async (doc) => {
+            const newData = doc.data();
+            dispatch(setUserConfig(newData.config));
+            dispatch(setPlayerData(newData));
+        });
+        userDoc.collection('heroes').onSnapshot(async (collection) => {
+            collection.forEach((elem) => {
+                console.log(elem.data());
+            });
+            // dispatch(setPlayerHeroes());
+            // setPlayer(doc.data());
+        });
+        // TODO unsubscribe();
+    };
 
     return (
         <NavigationContainer>
