@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-
 import { HERO_CHEST_TYPE } from '../../constants/chestConstants';
 
 const getPossibleHeroes = (heroList, rarity, chestType) => {
@@ -10,8 +8,7 @@ const randomlySelectHero = (heroList) => {
     return heroList[Math.floor(Math.random() * heroList.length)];
 };
 
-const openChest = async (chestType, amount = 1) => {
-    const { heroes, rates } = useSelector((state) => state.game || {});
+const openChest = async (heroes, rates, chestType, amount = 1) => {
     const chestRates = rates[chestType];
 
     const result = [];
@@ -29,9 +26,9 @@ const openChest = async (chestType, amount = 1) => {
     return result;
 };
 
-const openNormalHeroChest = (amount = 1) => openChest(HERO_CHEST_TYPE.NORMAL, amount);
-const openBronzeHeroChest = (amount = 1) => openChest(HERO_CHEST_TYPE.BRONZE, amount);
-const openSilverHeroChest = (amount = 1) => openChest(HERO_CHEST_TYPE.SILVER, amount);
-const openGoldHeroChest = (amount = 1) => openChest(HERO_CHEST_TYPE.GOLD, amount);
+const openNormalHeroChest = (heroes, rates, amount = 1) => openChest(heroes, rates, HERO_CHEST_TYPE.NORMAL, amount);
+const openBronzeHeroChest = (heroes, rates, amount = 1) => openChest(heroes, rates, HERO_CHEST_TYPE.BRONZE, amount);
+const openSilverHeroChest = (heroes, rates, amount = 1) => openChest(heroes, rates, HERO_CHEST_TYPE.SILVER, amount);
+const openGoldHeroChest = (heroes, rates, amount = 1) => openChest(heroes, rates, HERO_CHEST_TYPE.GOLD, amount);
 
 export { openNormalHeroChest, openBronzeHeroChest, openSilverHeroChest, openGoldHeroChest };

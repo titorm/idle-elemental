@@ -16,6 +16,7 @@ import Header from '../../components/Header';
 function StoreScreen({ navigation }) {
     const [summonedHeroes, setSummonedHeroes] = useState([]);
     const [normalChestPrice, setNormalChestPrice] = useState([]);
+    const { heroes, prices, rates } = useSelector((state) => state.game || {});
     const { resources } = useSelector((state) => state.player || {});
 
     useLayoutEffect(() => {
@@ -26,9 +27,9 @@ function StoreScreen({ navigation }) {
 
     useEffect(() => {
         (async () => {
-            setNormalChestPrice(await getNormalHeroChestPrice(1));
+            setNormalChestPrice(await getNormalHeroChestPrice(prices, 1));
         })();
-    }, []);
+    }, [prices]);
 
     const openNormalChest = async (amount = 1) => {
         if (!await playerHasResource(resources, normalChestPrice)) {
@@ -36,16 +37,16 @@ function StoreScreen({ navigation }) {
             return;
         }
         await removePlayerResource(resources, normalChestPrice);
-        const heroes = await openNormalHeroChest(amount);
-        await addHeroMedalsToPlayer(heroes);
-        setSummonedHeroes(heroes);
+        const newHeroes = await openNormalHeroChest(heroes, rates, amount);
+        await addHeroMedalsToPlayer(newHeroes);
+        setSummonedHeroes(newHeroes);
     };
 
     return (
         <>
             <Header />
             <View style={styles.container}>
-                {!!normalChestPrice[0] && (
+                {normalChestPrice && normalChestPrice[0] && (
                     <Button
                         onPress={() => openNormalChest(1)}
                         title={`${translate(keys.NORMAL_HERO_CHEST)} (${normalChestPrice[0].amount} ${translate(keys[normalChestPrice[0].currency])})`}

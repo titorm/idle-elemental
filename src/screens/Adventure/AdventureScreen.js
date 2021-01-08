@@ -16,6 +16,7 @@ import Header from '../../components/Header';
 
 function AdventureScreen({ navigation }) {
     const dispatch = useDispatch();
+    const { rates } = useSelector((state) => state.game || {});
     const { resources, multipliers, times } = useSelector((state) => state.player || {});
 
     useLayoutEffect(() => {
@@ -26,7 +27,7 @@ function AdventureScreen({ navigation }) {
 
     const collectResources = async () => {
         const now = new Date().getTime();
-        const generatedResources = await generatePlayerCurrenciesOvertime(multipliers, Math.floor((now - times.lastCollect) / 1000));
+        const generatedResources = await generatePlayerCurrenciesOvertime(rates, multipliers, Math.floor((now - times.lastCollect) / 1000));
         const newResources = { ...resources };
         const newTimes = { ...times, lastCollect: now };
         Object.keys(generatedResources).forEach((res) => {
